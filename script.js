@@ -74,7 +74,7 @@ function resetScreen(parent) {
     };
 }
 
-function makePalette() {
+function randomPalette() {
     resetScreen(document.getElementById('display-area'));
     const sliderVal = document.getElementById('slider').value;
     const paletteList = createPaletteList(sliderVal);
@@ -82,8 +82,8 @@ function makePalette() {
         makeSquare(p);
     };
     const squares = countSquares();
-    const widthPercent = (100 / getColumns(squares)) - 1;
-    const heightPercent = (100 / getRows(squares)) - 1;
+    const widthPercent = (100 / getColumns(squares));
+    const heightPercent = (100 / getRows(squares));
     for (let s of (document.getElementsByClassName('square'))) {
         s.style.width = `${widthPercent.toString()}%`;
         s.style.height = `${heightPercent.toString()}%`;
