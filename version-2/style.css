@@ -1,0 +1,54 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #d7d9e8;
+}
+
+header {
+    padding: 20px 40px;
+}
+
+p {
+    font-size: 18px;
+}
+
+#slider-int, #slide-container {
+    display: inline-block;
+    font-size: 18px;
+}
+
+#slide-container {
+    padding-left: 20px;
+}
+
+#slider {
+    min-width: 400px;
+}
+
+.buttons {
+    display: flex;
+    padding-top: 20px;
+}
+
+button {
+    font-size: 18px;
+}
+
+#display-area {
+    height: 600px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    background-color: #ffffff;
+    border-top: 5px solid #000000;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.square {
+    padding-top: 20px;
+    font-size: 22px;
+}
