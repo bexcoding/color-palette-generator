@@ -2,7 +2,7 @@
 Title: Color generator script, version 1
 Description: Script to be used with the color generator website for creating 
              different types of color palettes of varying sizes.
-Last Updated: May 7, 2023
+Last Updated: May 8, 2023
 Developer: Alexander Beck
 Email: beckhv2@gmail.com
 Github: https://github.com/bexcoding
@@ -58,9 +58,11 @@ function convertHexToNum(hexString) {
     }
 }
 
+
 /**
  * converts hex values to rgb values
  * @param {string} hex - two hex values that represent a single rgb value
+ * (example: 'A4' -> (10*16 + 4 = 164))
  * @returns rgb numerical value equivalent to two hex values
  */
 function hexToRgb(hex) {
@@ -78,7 +80,8 @@ function hexToRgb(hex) {
 /**
  * converts rgb values to hex values
  * @param {number} rgb - rgb value from 0 to 255
- * @returns string of hex value equivalent to one rgb value
+ * @returns string of hex value equivalent to one rgb value 
+ * (example: 255 -> 'FF')
  */
 function rgbToHex(rgb) {
     let hex = "";
@@ -91,8 +94,28 @@ function rgbToHex(rgb) {
 
 
 /**
+ * checks the brightness of the color square and returns the color that the 
+ * text should be
+ * @param {string} hex - a single hex color (example: '#A4B266')
+ * @returns either 'white' or 'black'
+ */
+function getBrightness(hex) {
+    let color = hex.slice(1);
+    let first = color.slice(0,2);
+    let second = color.slice(2,4);
+    let third = color.slice(4,6);
+    let total = hexToRgb(first) + hexToRgb(second) + hexToRgb(third);
+    if (total < 300) {
+        return 'white';
+    } else {
+        return 'black';
+    };
+}
+
+
+/**
  * creates a random hex value for a single color
- * @returns string of hex color
+ * @returns string of hex color (example: '#FFA328')
  */
 function randomHex() {
     let newHex = "#";
@@ -189,11 +212,13 @@ function randomPalette() {
 
     /**
      * makes a color square in the display area
-     * @param {string} color - a single hex value for a color
+     * @param {string} color - a single hex value for a color 
+     * (example: '#B233F0')
      */
     function makeSquare(color) {
         const square = document.createElement('div');
         square.innerHTML = color;
+        square.style.color = getBrightness(color);
         square.style.backgroundColor = color;
         square.setAttribute('class', 'square');
         square.setAttribute('id', `square-${countSquares() + 1}`);
