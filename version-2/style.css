@@ -10,6 +10,7 @@ header {
 
 p {
     font-size: 18px;
+    font-family: sans-serif;
 }
 
 #slider-int, #slide-container {
@@ -37,6 +38,7 @@ button {
 #display-area {
     height: 600px;
     width: 100%;
+    font-family: sans-serif;
     text-align: center;
     font-weight: bold;
     background-color: #ffffff;
