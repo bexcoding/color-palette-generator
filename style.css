@@ -8,18 +8,30 @@ header {
     padding: 20px 40px;
 }
 
+p {
+    font-size: 18px;
+}
 
 #slider-int, #slide-container {
     display: inline-block;
+    font-size: 18px;
 }
 
 #slide-container {
     padding-left: 20px;
 }
 
+#slider {
+    min-width: 400px;
+}
+
 .buttons {
     display: flex;
     padding-top: 20px;
+}
+
+button {
+    font-size: 18px;
 }
 
 #display-area {
@@ -36,6 +48,7 @@ header {
     justify-content: space-evenly;
 }
 
-#slider {
-    min-width: 400px;
+.square {
+    padding-top: 20px;
+    font-size: 22px;
 }

@@ -1,3 +1,19 @@
+/*
+Title: Color generator script, version 1
+Description: Script to be used with the color generator website for creating 
+             different types of color palettes of varying sizes.
+Last Updated: May 7, 2023
+Developer: Alexander Beck
+Email: beckhv2@gmail.com
+Github: https://github.com/bexcoding
+*/
+
+
+/**
+ * converts a single number to a single hex value
+ * @param {number} decimalNumber - the number to be converted
+ * @returns string of a hex value
+ */
 function convertNumToHex(decimalNumber) {
     if (decimalNumber < 10) {
         return decimalNumber;
@@ -16,18 +32,86 @@ function convertNumToHex(decimalNumber) {
     }
 }
 
+
+/**
+ * converts a single hex value to a single decimal number
+ * @param {string} hexString - the string to be converted
+ * @returns decimal number
+ */
+function convertHexToNum(hexString) {
+    if (Number(hexString)) {
+        return Number(hexString);
+    } else if (hexString === "0") {
+        return 0;
+    } else if (hexString === "A") {
+        return 10;
+    } else if (hexString === "B") {
+        return 11;
+    } else if (hexString === "C") {
+        return 12;
+    } else if (hexString === "D") {
+        return 13;
+    } else if (hexString === "E") {
+        return 14;
+    } else {
+        return 15;
+    }
+}
+
+/**
+ * converts hex values to rgb values
+ * @param {string} hex - two hex values that represent a single rgb value
+ * @returns rgb numerical value equivalent to two hex values
+ */
+function hexToRgb(hex) {
+    let rgb = 0;
+    let firstHex = hex.slice(0,1);
+    firstHex = convertHexToNum(firstHex);
+    rgb += (firstHex * 16);
+    let secondHex = hex.slice(1);
+    secondHex = convertHexToNum(secondHex);
+    rgb += secondHex;
+    return rgb;
+}
+
+
+/**
+ * converts rgb values to hex values
+ * @param {number} rgb - rgb value from 0 to 255
+ * @returns string of hex value equivalent to one rgb value
+ */
+function rgbToHex(rgb) {
+    let hex = "";
+    let firstNum = Math.floor(rgb / 16);
+    hex += convertNumToHex(firstNum);
+    let secondNum = Math.floor(rgb % 16);
+    hex += convertNumToHex(secondNum);
+    return hex;
+}
+
+
+/**
+ * creates a random hex value for a single color
+ * @returns string of hex color
+ */
 function randomHex() {
     let newHex = "#";
-    for (let i = 0; i < 6; i++) {
-        let newValue = Math.floor(Math.random() * 16); //number [0, 15]
-        newValue = convertNumToHex(newValue) // hex [0, F]
-        newHex += newValue;
+    for (let i = 0; i < 3; i++) {
+        let newValue = Math.floor(Math.random() * 256); // number [0, 255]
+        newHex += rgbToHex(newValue);
     }
     return newHex;
 }
 
+
+/**
+ * creates a list of hex values to represent the color palette
+ * @param {number} paletteSize - number of different hex values to create
+ * @param {function} f - function for creating different hex values
+ * @returns list of hex strings
+ */
 function createPaletteList(paletteSize, f) {
-    let paletteList = [];
+    const paletteList = [];
     for (let i = 0; i < paletteSize; i++) {
         paletteList.push(f());
     }
@@ -45,15 +129,18 @@ function updateVal(sliderVal) {
 
 
 /**
- * makes a random color palette and displays it in the 'display-area'
+ * creates a random color palette and displays it in the 'display-area'
  */
 function randomPalette() {
+    // clear the display of any current colors
     resetScreen(document.getElementById('display-area'));
     const sliderVal = document.getElementById('slider').value;
+    // create a list of hex numbers and make a color square for each
     const paletteList = createPaletteList(sliderVal, randomHex);
     for (let p of paletteList) {
         makeSquare(p);
     };
+    // count the total number of color squares and set height and width 
     const squares = countSquares();
     const widthPercent = (100 / getColumns(squares));
     const heightPercent = (100 / getRows(squares));
@@ -61,6 +148,7 @@ function randomPalette() {
         s.style.width = `${widthPercent.toString()}%`;
         s.style.height = `${heightPercent.toString()}%`;
     }; 
+
 
     /**
      * @returns number of color squares in the display area
