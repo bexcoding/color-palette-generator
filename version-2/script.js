@@ -1,5 +1,5 @@
 /*
-Title: Color generator script, version 1
+Title: Color generator script, version 2
 Description: Script to be used with the color generator website for creating 
              different types of color palettes of varying sizes.
 Last Updated: May 8, 2023
@@ -152,6 +152,70 @@ function updateVal(sliderVal) {
 
 
 /**
+     * @returns number of color squares in the display area
+     */
+function countSquares() {
+    const squareCount = document.getElementsByClassName('square');
+    return squareCount.length;
+}
+
+
+/**
+ * calculates how many rows are needed to display the colors
+ * @param {number} squares - number of squares in the display area
+ * @returns number 1 through 5
+ */
+function getRows(squares) {
+    if (squares > 5) {
+        return Math.ceil(squares / 5);
+    } else {
+        return 1;
+    };
+}
+
+
+/**
+ * calculates how many columns are needed to display the colors
+ * @param {number} squares - number of squares in the display area
+ * @returns number 1 through 5
+ */
+function getColumns(squares) {
+    if (squares >= 5) {
+        return 5;
+    } else {
+        return squares;
+    };
+}
+
+
+/**
+ * makes a color square in the display area
+ * @param {string} color - a single hex value for a color 
+ * (example: '#B233F0')
+ */
+function makeSquare(color) {
+    const square = document.createElement('div');
+    square.innerHTML = color;
+    square.style.color = getBrightness(color);
+    square.style.backgroundColor = color;
+    square.setAttribute('class', 'square');
+    square.setAttribute('id', `square-${countSquares() + 1}`);
+    document.getElementById('display-area').appendChild(square);
+}
+
+
+/**
+ * resets the screen to remove any color squares 
+ * @param {*} parent - the display area where the color squares appear
+ */
+function resetScreen(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild)
+    };
+}
+
+
+/**
  * creates a random color palette and displays it in the 'display-area'
  */
 function randomPalette() {
@@ -171,68 +235,4 @@ function randomPalette() {
         s.style.width = `${widthPercent.toString()}%`;
         s.style.height = `${heightPercent.toString()}%`;
     }; 
-
-
-    /**
-     * @returns number of color squares in the display area
-     */
-    function countSquares() {
-        const squareCount = document.getElementsByClassName('square');
-        return squareCount.length;
-    }
-
-
-    /**
-     * calculates how many rows are needed to display the colors
-     * @param {number} squares - number of squares in the display area
-     * @returns number 1 through 5
-     */
-    function getRows(squares) {
-        if (squares > 5) {
-            return Math.ceil(squares / 5);
-        } else {
-            return 1;
-        };
-    }
-    
-
-    /**
-     * calculates how many columns are needed to display the colors
-     * @param {number} squares - number of squares in the display area
-     * @returns number 1 through 5
-     */
-    function getColumns(squares) {
-        if (squares >= 5) {
-            return 5;
-        } else {
-            return squares;
-        };
-    }
-
-
-    /**
-     * makes a color square in the display area
-     * @param {string} color - a single hex value for a color 
-     * (example: '#B233F0')
-     */
-    function makeSquare(color) {
-        const square = document.createElement('div');
-        square.innerHTML = color;
-        square.style.color = getBrightness(color);
-        square.style.backgroundColor = color;
-        square.setAttribute('class', 'square');
-        square.setAttribute('id', `square-${countSquares() + 1}`);
-        document.getElementById('display-area').appendChild(square);
-    }
-
-
-    /**
-     * resets the screen to remove any color squares 
-     * @param {*} parent - the display area where the color squares appear
-     */
-    function resetScreen(parent) {
-        while (parent.firstChild) {
-            parent.removeChild(parent.firstChild)
-        };
-    }
 }
