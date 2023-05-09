@@ -13,9 +13,13 @@ Functionality:
 - Random palette: The generator can make color palettes, but only random ones. There is no capability to change the types of colors generated - only the number of colors generated can be changed.
 - Responsive text color: The text that displays the name of the hex color is capable of changing based on the relative brightness of the color. When the color is darker, the text is white so that it shows up on the background. When the background is lighter, it will have black text. This is to avoid having text that is hard to read when displayed on the background.
 
-# TODO List
+# Version 2
 
-TODO list for version 2 of the palette generator:
+Description: Version 2 has the added ability to create different types of color palettes.
 
-- [ ] Start version 2 files
-- [ ] Move version 1 to marked folder
+Functionality (Added On Top of Version 1):
+
+- Font: The font was standardized. The title is a serif font and the rest of the text is sans-serif.
+- Buttons: Four extra buttons were added and they were increased in size. Because the buttons took up more space, they were spaced evenly and allowed to wrap if the screen got sized down.
+- Squares: The color squares were assigned a minimum width so that they wrap when the screen is sized down.
+- Palette types: By adjusting the size of the random numbers generated, four different palettes were added. Now it is possible to create a purely random palette as well as a light, dark, warm, or cool palette.
