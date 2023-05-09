@@ -9,13 +9,17 @@
   <body>
     <header>
       <h1>Color Palette Generator</h1>
-      <p>Choose the size of your palette and press the button.</p>
+      <p>Choose the size and type of your palette.</p>
       <div id="slider-int">5</div>
       <div id="slide-container">
         <input type="range" id="slider" min="2" max="30" value="5" onchange="updateVal(this.value)">
       </div>
       <div class="buttons">
         <button onclick="randomPalette()">Random Palette</button>
+        <button onclick="lightPalette()">Light Palette</button>
+        <button onclick="darkPalette()">Dark Palette</button>
+        <button onclick="warmPalette()">Warm Palette</button>
+        <button onclick="coolPalette()">Cool Palette</button>
       </div>
     </header>  
     <div id="display-area">

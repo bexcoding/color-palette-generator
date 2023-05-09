@@ -29,10 +29,14 @@ p {
 .buttons {
     display: flex;
     padding-top: 20px;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 button {
     font-size: 18px;
+    min-width: 200px;
 }
 
 #display-area {
@@ -53,4 +57,5 @@ button {
 .square {
     padding-top: 20px;
     font-size: 22px;
+    min-width: 150px;
 }

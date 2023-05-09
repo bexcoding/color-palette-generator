@@ -128,6 +128,69 @@ function randomHex() {
 
 
 /**
+ * creates a random hex value for a single light color
+ * @returns string of hex color (example: '#FFA328')
+ */
+function lightHex() {
+    let newHex = "#";
+    for (let i = 0; i < 3; i++) {
+        let newValue = Math.floor(Math.random() * 121); // number [0, 120]
+        newValue = 255 - newValue; // number [134, 255]
+        newHex += rgbToHex(newValue);
+    }
+    return newHex;
+}
+
+
+/**
+ * creates a random hex value for a single dark color
+ * @returns string of hex color (example: '#FFA328')
+ */
+function darkHex() {
+    let newHex = "#";
+    for (let i = 0; i < 3; i++) {
+        let newValue = Math.floor(Math.random() * 121); // number [0, 120]
+        newHex += rgbToHex(newValue);
+    }
+    return newHex;
+}
+
+
+/**
+ * creates a random hex value for a single warm color
+ * @returns string of hex color (example: '#FFA328')
+ */
+function warmHex() {
+    let newHex = "#";
+    let redValue = Math.floor(Math.random() * 31); // number [0, 30]
+    redValue = 255 - redValue; // number [225, 255]
+    newHex += rgbToHex(redValue);
+    let greenValue = Math.floor(Math.random() * 201); // number [0, 200]
+    newHex += rgbToHex(greenValue)
+    let blueValue = Math.floor(Math.random() * 101); // number [0, 100]
+    newHex += rgbToHex(blueValue)
+    return newHex;
+}
+
+
+/**
+ * creates a random hex value for a single cool color
+ * @returns string of hex color (example: '#FFA328')
+ */
+function coolHex() {
+    let newHex = "#";
+    let redValue = Math.floor(Math.random() * 151); // number [0, 150]
+    newHex += rgbToHex(redValue);
+    let greenValue = Math.floor(Math.random() * 256); // number [0, 255]
+    newHex += rgbToHex(greenValue)
+    let blueValue = Math.floor(Math.random() * 51); // number [0, 50]
+    blueValue = 255 - blueValue; // number [205, 255]
+    newHex += rgbToHex(blueValue);
+    return newHex;
+}
+
+
+/**
  * creates a list of hex values to represent the color palette
  * @param {number} paletteSize - number of different hex values to create
  * @param {function} f - function for creating different hex values
@@ -152,8 +215,8 @@ function updateVal(sliderVal) {
 
 
 /**
-     * @returns number of color squares in the display area
-     */
+* @returns number of color squares in the display area
+*/
 function countSquares() {
     const squareCount = document.getElementsByClassName('square');
     return squareCount.length;
@@ -216,14 +279,16 @@ function resetScreen(parent) {
 
 
 /**
- * creates a random color palette and displays it in the 'display-area'
+ * clears the current display and creates a new palette to display based on 
+ * the input function
+ * @param {function} f - function for selecting palette (example: randomHex())
  */
-function randomPalette() {
+function createPalette(f) {
     // clear the display of any current colors
     resetScreen(document.getElementById('display-area'));
     const sliderVal = document.getElementById('slider').value;
     // create a list of hex numbers and make a color square for each
-    const paletteList = createPaletteList(sliderVal, randomHex);
+    const paletteList = createPaletteList(sliderVal, f);
     for (let p of paletteList) {
         makeSquare(p);
     };
@@ -235,4 +300,44 @@ function randomPalette() {
         s.style.width = `${widthPercent.toString()}%`;
         s.style.height = `${heightPercent.toString()}%`;
     }; 
+}
+
+
+/**
+ * creates a random color palette and displays it in the 'display-area'
+ */
+const randomPalette = function() {
+    createPalette(randomHex);
+}
+
+
+/**
+ * creates a random light color palette and displays it in the 'display-area'
+ */
+const lightPalette = function() {
+    createPalette(lightHex);
+}
+
+
+/**
+ * creates a random dark color palette and displays it in the 'display-area'
+ */
+const darkPalette = function() {
+    createPalette(darkHex);
+}
+
+
+/**
+ * creates a random dark warm palette and displays it in the 'display-area'
+ */
+const warmPalette = function() {
+    createPalette(warmHex);
+}
+
+
+/**
+ * creates a random cool color palette and displays it in the 'display-area'
+ */
+const coolPalette = function() {
+    createPalette(coolHex);
 }
